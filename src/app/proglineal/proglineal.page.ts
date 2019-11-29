@@ -22,8 +22,9 @@ export class ProglinealPage implements OnInit {
   rest;
   min;
   max;
-
+  solucion;
   form ;
+
   constructor(private apiService : ApiService) { 
       this.min=true;
       this.max=false;
@@ -31,10 +32,10 @@ export class ProglinealPage implements OnInit {
       this.form= {
         cantRest: 0,
         cantVars: 0,
-        term_indp: [],
         min: true,
         obj: []
       };
+      this.solucion=null;
   }
 
   ngOnInit() {
@@ -44,16 +45,14 @@ export class ProglinealPage implements OnInit {
   onSubmit(){
     
     console.log(this.form);
-    console.log("Post end");
-    
-    this.apiService.linear(this.form).subscribe((data)=> console.log(data));
+    this.apiService.linear(this.form).subscribe((data)=> this.solucion=data);
     
   }
 
   changeRest(){
     this.rest = Array(parseInt(this.form.cantRest)).fill(0);
     this.form.sign = Array(parseInt(this.form.cantRest)).fill(">");
-    this.form.term_indp=this.rest;
+    
     if(this.rest != null && this.vars != null){
       console.log("Entro por changerest");
       this.changeCoefs();
@@ -62,16 +61,18 @@ export class ProglinealPage implements OnInit {
   
   changeVars(){
     this.vars = Array(parseInt(this.form.cantVars)).fill(0);
-    if(this.rest != null && this.vars != null){
+
+    if(this.rest != null && this.vars != null){  //controla que hayan llenado los dos campos para cargar las restricciones
       console.log("Entro por changevars");
       this.changeCoefs();
     }
   }
 
   changeCoefs(){
-    this.form.coef =Array(parseInt(this.form.cantRest)).fill(0); ;
+    this.form.coef =Array(parseInt(this.form.cantRest)).fill(null); 
+    this.form.term_indp=Array(parseInt(this.form.cantRest)).fill(null); 
     for( var i=0; i<this.form.cantRest;i++){
-      this.form.coef[i] = Array(parseInt(this.form.cantVars)).fill(0);
+      this.form.coef[i] = Array(parseInt(this.form.cantVars)).fill(null);
     }
   }
 

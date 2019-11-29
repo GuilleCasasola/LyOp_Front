@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 
   // URL of development API
-  apiUrl: 'http://localhost:8000/'
+  apiUrl: 'https://guillecasasola.pythonanywhere.com/'
 };
 
 /*

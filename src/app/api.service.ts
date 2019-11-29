@@ -21,7 +21,7 @@ export class ApiService {
   public linear(data){
     console.log(API_URL);
     var httpOptions;
-    return this.http.post("http://localhost:8000/lineal",data,httpOptions);
+    return this.http.post(API_URL+"lineal",data,httpOptions);
     
   }
 }
