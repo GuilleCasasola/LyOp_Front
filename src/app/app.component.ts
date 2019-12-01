@@ -18,13 +18,13 @@ export class AppComponent {
     },
     {
       title: 'Contenidos de Logica y Optimizacion',
-      url: '/list',
-      icon: 'list'
+      url: '/contenidos',
+      icon: 'book'
     },
     {
       title: 'Programación Lineal',
       url: '/proglineal',
-      icon: 'list'
+      icon: 'desktop'
     }
 
   ];

@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
   <form  (ngSubmit)="onSubmit()">
         <ion-item>
             <ion-label>Cantidad de Variables</ion-label>
@@ -34,17 +34,17 @@
             <br>
             <ion-label *ngIf="vars">Función Objetivo</ion-label>
             <br>
-            <div class="block-container">
+            <div class="block-container" >
               <ng-container  *ngFor="let i of vars; let ii = index "   >
                   <ion-input  [(ngModel)]="form.obj[ii]" [ngModelOptions]="{standalone: true}" type="number" class="coeficiente" placeholder="Co{{ii+1}}"></ion-input>
-                  X{{ii+1}}<a *ngIf="ii!=vars.length-1">+</a>
+                  X{{ii+1}}<a *ngIf="ii!=vars.length-1"> + </a>
               </ng-container>
             </div>
             <br>
             <br>
             <ion-label *ngIf="rest" style="text-align: center;">Restricciones</ion-label>
            
-            <div style="overflow: auto; white-space: nowrap;" class="block-container">
+            <div  class="block-container">
 
               <ng-container *ngFor= "let j of rest; let jj = index" >
 
@@ -58,7 +58,7 @@
                 
                 <ng-container  *ngFor="let i of vars; let ii = index ">
                   <ion-input  [(ngModel)]="form.coef[jj][ii]" name="coef{{jj}}{{ii}}" type="number" class="coeficiente" placeholder="{{coefNames[jj]}}{{ii+1}}"  >
-                  </ion-input>X{{ii+1}}<a *ngIf="ii!=vars.length-1">+</a>
+                  </ion-input>X{{ii+1}}<a *ngIf="ii!=vars.length-1"> + </a>
                 </ng-container>
             
                 <br>
@@ -83,13 +83,25 @@
        
   </form>
 
-  <div *ngIf="solucion">
-    <ion-label >SOLUCIÓN</ion-label>
-    <ng-container  *ngFor="let i of solucion['solution']; let ii = index " >
-      X{{ii}}={{i}}
-    </ng-container>
-    Resultado objetivo: {{solucion["opt"]}}
+  <div *ngIf="solucion" style="border: 2px solid green ">
     
+    <ion-list>
+        <ion-list-header>
+            <h2 style="text-align: center;"> SOLUCIÓN</h2>
+        </ion-list-header>
+      <ion-item *ngFor="let i of solucion['solution']; let ii = index "> X{{ii+1}}={{i}}</ion-item>
+    
+    </ion-list>
+   
+   <ul> Resultado objetivo: {{solucion["opt"]}}</ul>
+    
+  </div>
+  
+
+  <div *ngIf="error" style="border: 2px solid red ;">
+      <h2 style="text-align: center;"> Error</h2>
+
+      <p> Recuerda completar todos los valores</p>
   </div>
   
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient }    from '@angular/common/http';
 import { ApiService } from "../api.service"
+import { LoadingController } from '@ionic/angular';
 
 
 
@@ -24,8 +25,8 @@ export class ProglinealPage implements OnInit {
   max;
   solucion;
   form ;
-
-  constructor(private apiService : ApiService) { 
+  error=false;
+  constructor(private apiService : ApiService , public loadingController: LoadingController) { 
       this.min=true;
       this.max=false;
       console.log(this.rest);
@@ -43,9 +44,20 @@ export class ProglinealPage implements OnInit {
   }
 
   onSubmit(){
-    
+    this.presentLoading()
     console.log(this.form);
-    this.apiService.linear(this.form).subscribe((data)=> this.solucion=data);
+    this.apiService.linear(this.form).subscribe(
+    (data)=> {
+      this.error=false;
+      this.solucion=data; 
+      this.loadingController.dismiss();
+    }, (error)=> {
+        this.error=true;
+        this.solucion = null;
+        this.loadingController.dismiss();
+  }
+   
+    );
     
   }
 
@@ -89,6 +101,21 @@ export class ProglinealPage implements OnInit {
   }
   changeMax(){
     this.max=this.min;
+  }
+   getContent() {
+    return document.querySelector('ion-content');
+  }
+   scrollToBottom() {
+    this.getContent().scrollToBottom(500);
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      message: 'Calculanding...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
   }
 
 
