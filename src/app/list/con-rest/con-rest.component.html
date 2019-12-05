@@ -1,3 +1,39 @@
+
+ <h1 style="text-align: center;">Programación Lineal</h1>
+  <p style="text-align:justify;">
+    La programación lineal es el campo de la programación matemática dedicado a maximizar o minimizar (optimizar) 
+    una función lineal, denominada función objetivo, de tal forma que las variables de dicha función estén sujetas a una serie de restricciones expresadas mediante un sistema de ecuaciones o inecuaciones también lineales. 
+    El método tradicionalmente usado para resolver problemas de programación lineal es el Método Simplex. 
+  </p>
+
+  <h1> Variables </h1>
+
+  <p> Las variables son números reales mayores o iguales a cero. <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9e7f103f7c70cd62807ef8309bbe141c491efc4b" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:6.985ex; height:2.509ex;" alt="{\displaystyle X_{i}\geq 0}">
+  En caso que se requiera que el valor resultante de las variables sea un número entero, el procedimiento de resolución se denomina Programación entera. 
+  </p>
+  <p> Las restricciones pueden ser de la forma:
+      <ul>
+      <li> Tipo 1: <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6a3abfffbda534e5fce858667faa0b0bd253ce38" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.005ex; width:18.222ex; height:7.343ex;" alt="{\displaystyle A_{j}=\sum _{i=1}^{N}a_{i,j}\times X_{i}}"> </li>
+      <li> Tipo 2: <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b3d5412bc0f8d011d4f9003e986c7bf67bc0b2b8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.005ex; width:18.011ex; height:7.343ex;" alt="{\displaystyle B_{j}\leq \sum _{i=1}^{N}b_{i,j}\times X_{i}}"></li>
+      <li> Tipo 3: <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/be8ea6352d63ca1b6fbf8b41c4334b4072a44af8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.005ex; width:17.918ex; height:7.343ex;" alt="{\displaystyle C_{j}\geq \sum _{i=1}^{N}c_{i,j}\times X_{i}}"></li> 
+    </ul>
+      Donde:
+
+        A = valor conocido a ser respetado estrictamente;
+        B = valor conocido que debe ser respetado o puede ser superado;
+        C = valor conocido que no debe ser superado;
+        j = número de la ecuación, variable de 1 a M (número total de restricciones);
+        a; b; y, c = coeficientes técnicos conocidos;
+        X = Incógnitas, de 1 a N;
+        i = número de la incógnita, variable de 1 a N.
+  
+
 <p>
-  con-rest works!
+
+  En general no hay restricciones en cuanto a los valores de N y M. Puede ser N = M; N > M; ó, N < M.
+
+  Sin embargo si las restricciones del Tipo 1 son N, el problema puede ser determinado, y puede no tener sentido una optimización.
+  
+  Los tres tipos de restricciones pueden darse simultáneamente en el mismo problema. 
+
 </p>

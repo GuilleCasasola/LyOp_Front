@@ -28,6 +28,11 @@
               <ion-select-option value="3">3</ion-select-option>
               <ion-select-option value="4">4</ion-select-option>
               <ion-select-option value="5">5</ion-select-option>
+              <ion-select-option value="6">6</ion-select-option>
+              <ion-select-option value="7">7</ion-select-option>
+              <ion-select-option value="8">8</ion-select-option>
+              <ion-select-option value="9">9</ion-select-option>
+              <ion-select-option value="10">10</ion-select-option>
             </ion-select>
         </ion-item>
         <div *ngIf="vars && rest" >
@@ -97,11 +102,15 @@
     
   </div>
   
+  <div *ngIf="errorRest" style="border: 2px solid yellow ;">
+    <h2 style="text-align: center;"> No existe Solución</h2>
+    <p> Las restricciones dadas son contradictorias</p>
+  </div>
 
-  <div *ngIf="error" style="border: 2px solid red ;">
+  <div *ngIf="errorServ" style="border: 2px solid red ;">
       <h2 style="text-align: center;"> Error</h2>
 
-      <p> Recuerda completar todos los valores</p>
+      <p> No has completado todos los valores, o es posible que exista un problema en el servidor</p>
   </div>
   
 </ion-content>

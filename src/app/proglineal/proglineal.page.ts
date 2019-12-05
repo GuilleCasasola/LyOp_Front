@@ -15,8 +15,8 @@ import { LoadingController } from '@ionic/angular';
 
 export class ProglinealPage implements OnInit {
 
-  varsNames = ["A","B","C","D","E"];
-  coefNames = ["a","b","c","d","e"];
+  varsNames = ["A","B","C","D","E","F","G","H","I","J","K"];
+  coefNames = ["a","b","c","d","e","f","g","h","i","j","k"];
   cantVars ;
   cantRest ;
   vars;
@@ -25,7 +25,8 @@ export class ProglinealPage implements OnInit {
   max;
   solucion;
   form ;
-  error=false;
+  errorServ=false;
+  errorRest=false;
   constructor(private apiService : ApiService , public loadingController: LoadingController) { 
       this.min=true;
       this.max=false;
@@ -48,11 +49,17 @@ export class ProglinealPage implements OnInit {
     console.log(this.form);
     this.apiService.linear(this.form).subscribe(
     (data)=> {
-      this.error=false;
-      this.solucion=data; 
+      this.errorServ=false;
+      if(data["error"]){
+        this.solucion= null;
+        this.errorRest=true;
+      }else{
+        this.errorRest=false;
+        this.solucion=data; 
+      }
       this.loadingController.dismiss();
     }, (error)=> {
-        this.error=true;
+        this.errorServ=true;
         this.solucion = null;
         this.loadingController.dismiss();
   }
@@ -91,10 +98,6 @@ export class ProglinealPage implements OnInit {
 
   calculate(){
     this.form.min=this.min;
-    console.log("HOLA CALCULAR");
-    console.log(this.max);
-    console.log(this.min);
-    
   } 
   changeMin(){
     this.min=this.max;
@@ -102,6 +105,7 @@ export class ProglinealPage implements OnInit {
   changeMax(){
     this.max=this.min;
   }
+
    getContent() {
     return document.querySelector('ion-content');
   }
