@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Programación Entera</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <form  (ngSubmit)="onSubmit()">
+        <ion-item>
+            <ion-label>Cantidad de Variables</ion-label>
+            <ion-select  name="cantVars" [(ngModel)]="form.cantVars" value="5" okText="Okay" (ionChange)="changeVars()" cancelText="Dismiss" >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2" selected>2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Cantidad de Restricciones</ion-label>
+            <ion-select  [(ngModel)]="form.cantRest" name="cantRest" (ionChange)="changeRest()" okText="Okay" cancelText="Dismiss" >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2" selected>2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+              <ion-select-option value="6">6</ion-select-option>
+              <ion-select-option value="7">7</ion-select-option>
+              <ion-select-option value="8">8</ion-select-option>
+              <ion-select-option value="9">9</ion-select-option>
+              <ion-select-option value="10">10</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <div *ngIf="vars && rest" >
+            <br>
+            <ion-label *ngIf="vars">Función Objetivo</ion-label>
+            <br>
+            <div class="block-container" >
+              <ng-container  *ngFor="let i of vars; let ii = index "   >
+                  <ion-input  [(ngModel)]="form.obj[ii]" [ngModelOptions]="{standalone: true}" type="number" class="coeficiente" placeholder="Co{{ii+1}}"></ion-input>
+                  X{{ii+1}}<a *ngIf="ii!=vars.length-1"> + </a>
+              </ng-container>
+            </div>
+            <br>
+            <br>
+            <ion-label *ngIf="rest" style="text-align: center;">Restricciones</ion-label>
+           
+            <div  class="block-container">
+
+              <ng-container *ngFor= "let j of rest; let jj = index" >
+
+                <ion-input [(ngModel)]="form.term_indp[jj]" name="term_indp{{jj}}"  type="number" class="coeficiente" placeholder="{{varsNames[jj]}}"  ></ion-input>
+                
+                <select name="type_{{jj}}" required [(ngModel)]="form.sign[jj]" value="" class="mmi" okText="Ok" cancelText="Cancelar" >
+                    <option value="=" selected>=</option>
+                    <option value=">">≥</option>
+                    <option value="<">≤</option>
+                </select>
+                
+                <ng-container  *ngFor="let i of vars; let ii = index ">
+                  <ion-input  [(ngModel)]="form.coef[jj][ii]" name="coef{{jj}}{{ii}}" type="number" class="coeficiente" placeholder="{{coefNames[jj]}}{{ii+1}}"  >
+                  </ion-input>X{{ii+1}}<a *ngIf="ii!=vars.length-1"> + </a>
+                </ng-container>
+            
+                <br>
+              </ng-container>
+            
+            </div>
+          
+          
+            <ion-item>
+              <ion-label>Maximizar</ion-label>
+              <ion-checkbox color="primary" [(ngModel)]="max" [ngModelOptions]="{standalone: true}" slot="start" (click)=changeMin()></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Minimizar</ion-label>
+              <ion-checkbox color="primary" [(ngModel)]="min" [ngModelOptions]="{standalone: true}" slot="start" (click)=changeMax()></ion-checkbox>
+            </ion-item>
+            <div >
+                <ion-button expand="block" type="submit" (click)=calculate() >Calcular</ion-button>      
+            </div>
+        </div>
+        
+       
+  </form>
+
+  <div *ngIf="solucion" style="border: 2px solid green ">
+    
+    <ion-list>
+        <ion-list-header>
+            <h2 style="text-align: center;"> SOLUCIÓN</h2>
+        </ion-list-header>
+      <ion-item *ngFor="let i of solucion['solution']; let ii = index "> X{{ii+1}}={{i}}</ion-item>
+    
+    </ion-list>
+   
+   <ul> Resultado objetivo: {{solucion["opt"]}}</ul>
+    
+  </div>
+  
+  <div *ngIf="errorRest" style="border: 2px solid yellow ;">
+    <h2 style="text-align: center;"> No existe Solución</h2>
+    <p> Las restricciones dadas son contradictorias</p>
+  </div>
+
+  <div *ngIf="errorServ" style="border: 2px solid red ;">
+      <h2 style="text-align: center;"> Error</h2>
+
+      <p> No has completado todos los valores, o es posible que exista un problema en el servidor</p>
+  </div>
+  
+</ion-content>

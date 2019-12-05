@@ -1,0 +1,121 @@
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from "../api.service"
+import { LoadingController } from '@ionic/angular';
+
+
+@Component({
+  selector: 'app-progentera',
+  templateUrl: './progentera.page.html',
+  styleUrls: ['./progentera.page.scss'],
+})
+export class ProgenteraPage implements OnInit {
+
+
+  varsNames = ["A","B","C","D","E","F","G","H","I","J","K"];
+  coefNames = ["a","b","c","d","e","f","g","h","i","j","k"];
+  cantVars ;
+  cantRest ;
+  vars;
+  rest;
+  min;
+  max;
+  solucion;
+  form ;
+  errorServ=false;
+  errorRest=false;
+  constructor(private apiService : ApiService , public loadingController: LoadingController) { 
+      this.min=true;
+      this.max=false;
+      console.log(this.rest);
+      this.form= {
+        cantRest: 0,
+        cantVars: 0,
+        min: true,
+        obj: []
+      };
+      this.solucion=null;
+  }
+
+  ngOnInit() {
+
+  }
+
+  onSubmit(){
+    this.presentLoading()
+    console.log(this.form);
+    this.apiService.entera(this.form).subscribe(
+    (data)=> {
+      this.errorServ=false;
+      if(data["error"]){
+        this.solucion= null;
+        this.errorRest=true;
+      }else{
+        this.errorRest=false;
+        this.solucion=data; 
+      }
+      this.loadingController.dismiss();
+    }, (error)=> {
+        this.errorServ=true;
+        this.solucion = null;
+        this.loadingController.dismiss();
+  }
+   
+    );
+    
+  }
+
+  changeRest(){
+    this.rest = Array(parseInt(this.form.cantRest)).fill(0);
+    this.form.sign = Array(parseInt(this.form.cantRest)).fill(">");
+    
+    if(this.rest != null && this.vars != null){
+      console.log("Entro por changerest");
+      this.changeCoefs();
+    }
+  }
+  
+  changeVars(){
+    this.vars = Array(parseInt(this.form.cantVars)).fill(0);
+
+    if(this.rest != null && this.vars != null){  //controla que hayan llenado los dos campos para cargar las restricciones
+      console.log("Entro por changevars");
+      this.changeCoefs();
+    }
+  }
+
+  changeCoefs(){
+    this.form.coef =Array(parseInt(this.form.cantRest)).fill(null); 
+    this.form.term_indp=Array(parseInt(this.form.cantRest)).fill(null); 
+    for( var i=0; i<this.form.cantRest;i++){
+      this.form.coef[i] = Array(parseInt(this.form.cantVars)).fill(null);
+    }
+  }
+
+
+  calculate(){
+    this.form.min=this.min;
+  } 
+  changeMin(){
+    this.min=this.max;
+  }
+  changeMax(){
+    this.max=this.min;
+  }
+
+   getContent() {
+    return document.querySelector('ion-content');
+  }
+   scrollToBottom() {
+    this.getContent().scrollToBottom(500);
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      message: 'Calculanding...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }
+
+}

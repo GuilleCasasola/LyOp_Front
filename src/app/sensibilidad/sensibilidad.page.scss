@@ -1,0 +1,55 @@
+.coeficiente {
+    width: 100%;
+    display: inline-block; 
+    text-align: center;
+    border: 1px;
+} 
+
+.benef {
+    width: 20%;
+    display: inline-block; 
+    text-align: center;
+    border: 1px;
+} 
+
+.mmi {
+    padding-left : 5%;
+    padding-right: 5%;
+    margin:0; 
+    display: inline-block;
+    text-align: center;
+}
+
+.border{
+    border: 1px grey solid;
+    text-align:  center;
+}
+.block-container{
+    border: 1px solid slateblue;
+    padding: 2%;
+    margin: 1%;
+    overflow: auto; 
+    white-space:nowrap;
+}
+
+body {
+    cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
+
+.header .col {
+    background-color:lightgrey;
+}
+
+.col {
+    border: solid 1px grey;
+    border-bottom-style: none;
+    border-right-style: none;
+}
+
+.col:last-child {
+    border-right: solid 1px grey;
+}
+
+.row:last-child .col {
+    border-bottom: solid 1px grey;
+}

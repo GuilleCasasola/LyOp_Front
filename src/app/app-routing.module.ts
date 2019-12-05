@@ -18,6 +18,14 @@ const routes: Routes = [
   {
     path: 'proglineal',
     loadChildren: () => import('./proglineal/proglineal.module').then( m => m.ProglinealPageModule)
+  },
+  {
+    path: 'progentera',
+    loadChildren: () => import('./progentera/progentera.module').then( m => m.ProgenteraPageModule)
+  },
+  {
+    path: 'sensibilidad',
+    loadChildren: () => import('./sensibilidad/sensibilidad.module').then( m => m.SensibilidadPageModule)
   }
 ];
 

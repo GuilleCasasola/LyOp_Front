@@ -25,7 +25,18 @@ export class AppComponent {
       title: 'Programación Lineal',
       url: '/proglineal',
       icon: 'desktop'
-    }
+    },
+    {
+      title: 'Programación Entera',
+      url: '/progentera',
+      icon: 'desktop'
+    },
+    {
+      title: 'Sensibilidad',
+      url: '/sensibilidad',
+      icon: 'desktop'
+    },
+
 
   ];
    

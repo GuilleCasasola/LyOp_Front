@@ -19,9 +19,21 @@ export class ApiService {
   constructor(private http : HttpClient) { }
 
   public linear(data){
-    console.log(API_URL);
     var httpOptions;
     return this.http.post(API_URL+"lineal",data,httpOptions);
+    
+  }
+
+  
+  public entera(data){
+    var httpOptions;
+    return this.http.post(API_URL+"integer",data,httpOptions);
+    
+  }
+
+  public sensibilidad(data){
+    var httpOptions;
+    return this.http.post(API_URL+"sensibility",data,httpOptions);
     
   }
 }

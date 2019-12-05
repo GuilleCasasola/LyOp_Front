@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Sensibilidad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <form  (ngSubmit)="onSubmit()">
+        <ion-item>
+            <ion-label>Cantidad de Productos</ion-label>
+            <ion-select  name="cantProductos" [(ngModel)]="form.cantProductos" value="5" okText="Okay" (ionChange)="changeProd()" cancelText="Dismiss" >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2" selected>2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Cantidad de Insumos</ion-label>
+            <ion-select  [(ngModel)]="form.cantInsumos" name="cantInsumos" (ionChange)="changeRest()" okText="Okay" cancelText="Dismiss" >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2" selected>2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+              <ion-select-option value="6">6</ion-select-option>
+              <ion-select-option value="7">7</ion-select-option>
+              <ion-select-option value="8">8</ion-select-option>
+              <ion-select-option value="9">9</ion-select-option>
+              <ion-select-option value="10">10</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <div *ngIf="prod && rest" >
+            <br>
+            <ion-label *ngIf="prod" class="mmi"> Beneficio de cada producto ($$)</ion-label>
+            <br>
+            <div class="block-container" >
+              <ng-container  *ngFor="let i of prod; let ii = index "   >
+                  Producto {{ii+1}} = $<ion-input  [(ngModel)]="form.beneficio[ii]" [ngModelOptions]="{standalone: true}" type="number" class="benef" placeholder="##" value="0"></ion-input> <br>
+              </ng-container>
+            </div>
+            <br>
+            <ion-label *ngIf="prod" class="mmi">Stock de cada insumo</ion-label>
+            <br>
+            <div class="block-container" >
+              <ng-container  *ngFor="let i of rest; let ii = index "   >
+                  Stock Insumo {{ii+1}} = <ion-input  [(ngModel)]="form.stockInsumos[ii]" [ngModelOptions]="{standalone: true}" type="number" class="benef" placeholder="##"></ion-input> <br>
+              </ng-container>
+            </div>
+            <br>
+            <ion-label *ngIf="rest" style="text-align: center;" class="mmi">Insumos para cada producto</ion-label>
+           
+            <div  class="block-container">
+              <table >
+                <tr>
+                  <td col-1></td>
+                  <td *ngFor= "let j of prod; let ii = index" class="border" style="background-color: rgb(191, 241, 241);"> <p> Prod. {{ii+1}} </p></td>
+                </tr>
+
+                <tr *ngFor= "let j of rest; let jj = index" >
+                      <td col-1 class="border" style="background-color: rgb(191, 241, 241);"> <p> Insumo {{jj+1}} </p></td>
+                      
+                      <td col-1 *ngFor="let i of prod; let ii = index " class="border">
+                          <ion-input  [(ngModel)]="form.costeProd[ii][jj]" name="coef{{jj}}{{ii}}" type="number" class="coeficiente" placeholder="##" value="0"  >
+                            </ion-input>
+                      </td>  
+                </tr>
+                
+              </table>
+            </div>
+          
+            <div >
+                <ion-button expand="block" type="submit" (click)=calculate() >Calcular</ion-button>      
+            </div>
+        </div>
+        
+       
+  </form>
+
+  <div *ngIf="solucion" style="border: 2px solid green " class="block-container">
+    
+    <ion-list>
+        <ion-list-header>
+            <h2 style="text-align: center;"> SOLUCIÓN</h2>
+        </ion-list-header>
+      <ion-item *ngFor="let i of solucion['solution']; let ii = index "> Producto{{ii+1}}={{i}}</ion-item>
+    
+    </ion-list>
+   
+   <ul> Resultado objetivo: {{solucion["opt"]}}</ul>
+   <table>
+     <tr> 
+        <td></td>
+        <td>Consumo</td>
+        <td>Costo Reducido</td>
+        <!-- <td>Dual Value</td> -->
+     </tr>
+     <tr *ngFor="let sol of solucion['solution']; let i = index">
+        <td class="border"> Producto {{i+1}}</td>
+        <td class="border">{{solucion['consumo'][i]}} </td>
+        <td class="border">{{solucion['costo_reducido'][i]}}</td>
+       <!-- <td class="border">{{solucion['dual_value'][i]}}</td> -->
+     </tr>
+   </table>       
+    
+  </div>
+  
+  <div *ngIf="errorRest" style="border: 2px solid yellow ;">
+    <h2 style="text-align: center;"> No existe Solución</h2>
+    <p> Es probable que los algun producto no tenga ningun insumo requerido.</p>
+  </div>
+
+  <div *ngIf="errorServ" style="border: 2px solid red ;">
+      <h2 style="text-align: center;"> Error</h2>
+
+      <p> No has completado todos los valores, o es posible que exista un problema en el servidor</p>
+  </div>
+  
+</ion-content>
