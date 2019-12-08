@@ -27,6 +27,7 @@
     "@ionic/angular": "^4.7.1",
     "angular-gantt": "^2.0.0-rc.1",
     "angular-gantt-chart": "^1.2.0",
+    "angular2-chartjs": "^0.5.1",
     "cordova-browser": "^6.0.0",
     "core-js": "^2.5.4",
     "core-util-is": "^1.0.2",

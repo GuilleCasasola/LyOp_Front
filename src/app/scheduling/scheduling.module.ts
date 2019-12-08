@@ -8,7 +8,7 @@ import { SchedulingPageRoutingModule } from './scheduling-routing.module';
 
 import { SchedulingPage } from './scheduling.page';
 
-import { GanttChart } from 'angular-gantt-chart';
+import {ChartModule} from 'angular2-chartjs';
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { GanttChart } from 'angular-gantt-chart';
     FormsModule,
     IonicModule,
     SchedulingPageRoutingModule,
-    GanttChart
+    ChartModule
   ],
   declarations: [SchedulingPage
   ]

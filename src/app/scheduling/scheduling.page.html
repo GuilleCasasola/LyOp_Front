@@ -126,16 +126,6 @@
        
   </form>
 
-  <div *ngIf="solucion" style="border: 2px solid green " class="block-container">
-    
-      <!-- Esto deberia funcionar si se hubiera importado GanttChart -->
-      <!--
-      <h1> Event Management</h1>
-      <div  [chartData]="gantt_ChartData" [chartOptions]="gantt_chart_options" GanttChart>
-      </div>
-      -->
-      <!-- gant_chartData and gantt_chart_options has to be supplied from the componet class -->
-  </div>
   
   <div *ngIf="errorRest" style="border: 2px solid yellow ;">
     <h2 style="text-align: center;"> No existe Solución</h2>
