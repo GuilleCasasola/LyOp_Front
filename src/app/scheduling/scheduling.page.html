@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Scheduling</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <form  (ngSubmit)="onSubmit()">
+        <ion-item>
+            <ion-label>Cantidad de Trabajos</ion-label>
+            <ion-select  name="cantJobs" [(ngModel)]="form.cantJobs" okText="Okay" (ionChange)="changeJobs()" cancelText="Dismiss" >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2" selected>2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Cantidad de Tareas</ion-label>
+            <ion-select  [(ngModel)]="form.cantTasks" name="cantTasks" (ionChange)="changeTasks()" okText="Okay" cancelText="Dismiss" >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2" selected>2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cantidad de Recursos</ion-label>
+          <ion-select  name="cantRecursos" [(ngModel)]="form.cantRecursos" value="5" okText="Okay" (ionChange)="changeRec()" cancelText="Dismiss" >
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2" selected>2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cantidad de Restricciones</ion-label>
+          <ion-select  name="cantRest" [(ngModel)]="cantRest" value="5" okText="Okay" (ionChange)="changeRest()" cancelText="Dismiss" >
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2" selected>2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <div *ngIf="form.cantTasks >= 1 && form.cantJobs >= 1 && form.cantRecursos >= 1 && cantRest >=1" >
+
+          <!--tiempo de las Tasks -->
+            <br>
+            <ion-label *ngIf="form.tiempoTasks" class="mmi"> Tiempo de cada Tarea </ion-label>
+            <br>
+            <div class="block-container" >
+              <ng-container  *ngFor="let i of form.tiempoTasks; let ii = index "   >
+                  Tarea {{ii+1}}: <ion-input  [(ngModel)]="form.tiempoTasks[ii]" [ngModelOptions]="{standalone: true}" type="number" class="tiempo" placeholder="##" value="0"></ion-input> <br>
+              </ng-container>
+            </div>
+            <br>
+
+            <!--capacidades de cada recurso -->
+            <ion-label *ngIf="form.cantRecursos >= 1" class="mmi">Capacidad de cada recurso</ion-label>
+            <br>
+            <div class="block-container" >
+              <ng-container  *ngFor="let i of form.cantUnidades; let ii = index "   >
+                  Recurso {{ii+1}}: <ion-input  [(ngModel)]="form.cantUnidades[ii]" [ngModelOptions]="{standalone: true}" type="number" class="capac" placeholder="##"></ion-input> <br>
+              </ng-container>
+            </div>
+            <br>
+
+            <!--demanda de cada task -->
+            <ion-label *ngIf="form.cantRecursos >= 1" style="text-align: center;" class="mmi">Demanda de cada tarea</ion-label>
+            <div  class="block-container">
+              <table >
+                <tr>
+                  <td col-1></td>
+                  <td *ngFor= "let j of form.cantUnidades; let ii = index" class="border" style="background-color: rgb(191, 241, 241);"> <p> Rec. {{ii+1}} </p></td>
+                </tr>
+
+                <tr *ngFor= "let j of form.tiempoTasks; let jj = index" >
+                      <td col-1 class="border" style="background-color: rgb(191, 241, 241);"> <p> Tarea {{jj+1}} </p></td>
+                      
+                      <td col-1 *ngFor="let i of form.cantUnidades; let ii = index " class="border">
+                          <ion-input  [(ngModel)]="form.demandaTasks[jj][ii]" name="dem{{jj}}{{ii}}" type="number" class="demanda" placeholder="##" value="0"  >
+                            </ion-input>
+                      </td>  
+                </tr>
+                
+              </table>
+            </div>
+
+            <!--restricciones de precedencias -->
+            <ion-label *ngIf="cantRest >= 1" style="text-align: center;" class="mmi">Restricciones de precedencia (endBeforeStart(Tarea1, Tarea2))</ion-label>
+            <div  class="block-container">
+              <table >
+                <tr>
+                  <td col-1></td>
+                  <td *ngFor= "let j of dosTasks; let ii = index" class="border" style="background-color: rgb(191, 241, 241);"> <p> Tarea {{ii+1}} </p></td>
+                </tr>
+
+                <tr *ngFor= "let j of form.precedencias; let jj = index" >
+                      <td col-1 class="border" style="background-color: rgb(191, 241, 241);"> <p> Rest. {{jj+1}} </p></td>
+                      
+                      <td col-1 *ngFor="let i of dosTasks; let ii = index " class="border">
+                          <ion-input  [(ngModel)]="form.precedencias[jj][ii]" name="dem{{jj}}{{ii}}" type="number" class="demanda" placeholder="##" >
+                            </ion-input>
+                      </td>  
+                </tr>
+                
+              </table>
+            </div>
+          
+            <div >
+                <ion-button expand="block" type="submit" (click)=calculate() >Calcular</ion-button>      
+            </div>
+        </div>
+        
+       
+  </form>
+
+  <div *ngIf="solucion" style="border: 2px solid green " class="block-container">
+    
+      <!-- Esto deberia funcionar si se hubiera importado GanttChart -->
+      <!--
+      <h1> Event Management</h1>
+      <div  [chartData]="gantt_ChartData" [chartOptions]="gantt_chart_options" GanttChart>
+      </div>
+      -->
+      <!-- gant_chartData and gantt_chart_options has to be supplied from the componet class -->
+  </div>
+  
+  <div *ngIf="errorRest" style="border: 2px solid yellow ;">
+    <h2 style="text-align: center;"> No existe Solución</h2>
+    <p> Revisa los datos ingresados.</p>
+  </div>
+
+  <div *ngIf="errorServ" style="border: 2px solid red ;">
+      <h2 style="text-align: center;"> Error</h2>
+
+      <p> No has completado todos los valores, o es posible que exista un problema en el servidor</p>
+  </div>
+  
+</ion-content>

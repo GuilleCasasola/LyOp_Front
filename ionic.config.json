@@ -1,5 +1,7 @@
 {
   "name": "LyOp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

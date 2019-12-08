@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'sensibilidad',
     loadChildren: () => import('./sensibilidad/sensibilidad.module').then( m => m.SensibilidadPageModule)
+  },
+  {
+    path: 'scheduling',
+    loadChildren: () => import('./scheduling/scheduling.module').then( m => m.SchedulingPageModule)
   }
 ];
 

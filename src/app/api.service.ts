@@ -36,4 +36,9 @@ export class ApiService {
     return this.http.post(API_URL+"sensibility",data,httpOptions);
     
   }
+
+  public scheduling(data){
+    var httpOptions;
+    return this.http.post('http://localhost:8000/'+"scheduling", data, httpOptions);
+  }
 }
