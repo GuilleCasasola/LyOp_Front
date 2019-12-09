@@ -19,7 +19,7 @@
   <p style="text-align:justify;">
     La programación lineal es el campo de la programación matemática dedicado a maximizar o minimizar (optimizar) 
     una función lineal, denominada función objetivo, de tal forma que las variables de dicha función estén sujetas a una serie de restricciones expresadas mediante un sistema de ecuaciones o inecuaciones también lineales. 
-    El método tradicionalmente usado para resolver problemas de programación lineal es el Método Simplex*<sup>(1)</sup> y el método gráfico. 
+    Algunos de los métodos más comunes para resolver problemas de programación lineal es el Método Simplex*<sup>(1)</sup> y el Método Gráfico. 
   </p>
 
   <h1> Variables </h1>
@@ -54,7 +54,7 @@
       de soluciones, comenzando siempre por las de mayor pendiente, en búsqueda de un óptimo en la función objetivo.
     </i> 
 </p>
-<iframe width="100%" height="250 px" src="https://www.youtube.com/watch?v=7EqYVjYHGnA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7EqYVjYHGnA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <h2 style="text-align: left;">Programación Entera</h2>
 <p style="text-align:justify;">
     En algunos casos se requiere que la solución óptima se componga de valores enteros para algunas de las
@@ -66,7 +66,7 @@
     se toma el entero más próximo superior e inferior y se plantean dos nuevos subproblemas con 
     esos valores como restricciones para las variables.
   </p>
-  <iframe width="100%" height="250 px" src="https://www.youtube.com/watch?v=_8nyfpWEk1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_8nyfpWEk1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <h2 style="text-align: left;">Análisis de Sensibilidad</h2>
   <p style="text-align:justify;">
       Encontrar el óptimo de un problema de optimización es solo una parte del proceso de solución.
@@ -84,7 +84,7 @@
         derecho de la inecuación que describe una restricción. Resulta útil, por ejemplo, para
          identificar cambios en los ingresos al modificar los límites de los recursos disponibles. En el ámbito
           económico se lo suele asociar a la denominación "Shadow Price" o precio sombra.</p>
-  <iframe width="100%" height="250 px" src="https://www.youtube.com/watch?v=NilqkAwZs1c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/NilqkAwZs1c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   
 
 
@@ -93,5 +93,27 @@
 <!--Prog NO lineal-->
 <h1 style="text-align: center;">Programación No Lineal</h1>
   <p style="text-align:justify;">
-      Hacer 
+    Programación no lineal (PNL) es el proceso de resolución de un sistema de
+     igualdades y desigualdades sujetas a un conjunto de restricciones sobre un conjunto de 
+     variables reales desconocidas, con un función objetivo a maximizar (o minimizar), 
+     cuando alguna de las restricciones o la función objetivo no son lineales. Para solucionar este tipo
+     de problemas se pueden hacer uso de formulaciones especiales de problemas de programación lineal, o bien
+      técnicas de Ramificación y poda ("Branch & cut").
+     Los problemas de PNL según la función objetivo que se trabaje, en PNL de función continua y no continua, que incluyen
+     los problemas combinatorios, de planning y scheduling. 
   </p>
+  <h1 style="text-align: center;">Planning y Scheduling</h1>
+  <p style="text-align:justify;">
+    Planning o planificación es un caso especial de optimización con restricciones discreta. En un problema de planning, 
+    se definen una serie de trabajos o jobs, que consisten en distintas tareas o tasks. Para modelar el problema, 
+    se pueden representar dichas tareas con variables de intervalos de tiempo, dados por un tiempo inicial, uno final y una
+     duración. El orden en el que se pueden realizar las tareas tiene ciertas restricciones de precedencia. 
+     El objetivo, generalmente, es presentar un ordentamiento de las tareas que permita terminar todos los trabajos 
+     en el menor tiempo posible. La técnica clásica para resolver problemas de planning es el método del camino crítico.<br>
+     Cuando a un problema de planning se le añaden consideraciones con respecto a los recursos necesarios
+      para la realización de las tareas, se habla de problemas de scheduling. En estos casos, el orden de las tareas
+      está también limitado por la disponibilidad de recursos, en especial si estos son compartidos por varias tareas. 
+      Según los recursos involucrados en el problema, se puede hablar de scheduling con recursos discretos (incluyendo recursos unarios)
+      o recursos continuos. También se pueden clasificar los recursos según su reusabilidad, distinguiendo recursos con reposición y sin reposición.
+  </p>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/MqgMrASzKU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
