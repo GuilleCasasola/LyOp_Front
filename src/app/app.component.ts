@@ -36,6 +36,11 @@ export class AppComponent {
       url: '/sensibilidad',
       icon: 'desktop'
     },
+    {
+      title: 'Scheduling',
+      url: '/scheduling',
+      icon: 'desktop'
+    },
 
 
   ];

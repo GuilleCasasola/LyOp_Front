@@ -36,4 +36,10 @@ export class ApiService {
     return this.http.post(API_URL+"sensibility",data,httpOptions);
     
   }
+
+
+  public scheduling(data){
+    var httpOptions;
+    return this.http.post(API_URL+"scheduling", data, httpOptions);
+  }
 }
