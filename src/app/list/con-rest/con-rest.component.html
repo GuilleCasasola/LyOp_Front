@@ -1,9 +1,25 @@
+<!--Intro optimizacion con restricciones-->
+<h1 style="text-align: center;">Optimización con restricciones</h1>
+<p style="text-align:justify;">
+    Los problemas de optimización con restricciones se basan en la optimización de una función, donde el espacio de soluciones está restringido.
+    Un problema de optimización con restricciones puede ser representado de la siguiente forma:
+  </p>
+  <p class="tab">Sea ƒ: ℜ<sup>n</sup> → ℜ una función a optimizar (función objetivo)</p>
+  <p class="tab">Se formula el problema como opt ƒ(x<sub>0</sub>,... , x<sub>n</sub>), sujeto a </p>
+  <p class="tab">1) g<sub>i</sub>(x)=c<sub>i</sub> con i=1...n (restricciones de igualdad)</p>
+  <p class="tab">2) h<sub>j</sub>(x)≤d<sub>j</sub> o bien h<sub>j</sub>(x)≥d<sub>j</sub> con i=1...m (restricciones de desigualdad)</p>
+  <p style="text-align:justify;">
+  Los óptimos locales y globales se definen de la misma manera que en optimización sin restricciones, pero deben cumplir las condiciones establecidas en 1) y 2).
+   Según el tipo de función objetivo y restricciones, se pueden definir distintos tipos de optimización con restricciones. A continuación se presentan algunos de ellos.
+  </p>
 
- <h1 style="text-align: center;">Programación Lineal</h1>
+<!--Tipos de programacion con restricciones-->
+<!--Prog lineal-->
+  <h1 style="text-align: center;">Programación Lineal</h1>
   <p style="text-align:justify;">
     La programación lineal es el campo de la programación matemática dedicado a maximizar o minimizar (optimizar) 
     una función lineal, denominada función objetivo, de tal forma que las variables de dicha función estén sujetas a una serie de restricciones expresadas mediante un sistema de ecuaciones o inecuaciones también lineales. 
-    El método tradicionalmente usado para resolver problemas de programación lineal es el Método Simplex. 
+    Algunos de los métodos más comunes para resolver problemas de programación lineal son el Método Simplex*<sup>(1)</sup> y el Método Gráfico. 
   </p>
 
   <h1> Variables </h1>
@@ -25,15 +41,81 @@
         j = número de la ecuación, variable de 1 a M (número total de restricciones);
         a; b; y, c = coeficientes técnicos conocidos;
         X = Incógnitas, de 1 a N;
-        i = número de la incógnita, variable de 1 a N.
-  
-
-<p>
-
+        i = número de la incógnita, variable de 1 a N.  
+    
+<p style="text-align:justify;">
   En general no hay restricciones en cuanto a los valores de N y M. Puede ser N = M; N > M; ó, N < M.
-
   Sin embargo si las restricciones del Tipo 1 son N, el problema puede ser determinado, y puede no tener sentido una optimización.
-  
   Los tres tipos de restricciones pueden darse simultáneamente en el mismo problema. 
-
 </p>
+<p style="text-align:justify;">
+    <i>*<sup>(1)</sup>: el método Simplex consiste en aplicar las restricciones, delimitando así un espacio de soluciones 
+      (llamado también poliedro de soluciones). Dicho espacio de soluciones quedará entonces determinado como la intersección de los semiespacios correspondientes 
+     a las restricciones. Luego se procede a recorrer las aristas del poliedro
+      de soluciones, comenzando siempre por las aquellas de mayor pendiente, en búsqueda de un óptimo en la función objetivo.
+    </i> 
+</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7EqYVjYHGnA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 style="text-align: left;">Programación Entera</h2>
+<p style="text-align:justify;">
+    En algunos casos se requiere que la solución óptima se componga de valores enteros para algunas de las
+     variables. En este caso, se habla de un problema de <b>Programación Entera</b>. La resolución de este tipo de problema se obtiene analizando 
+     las posibles alternativas de valores 
+    enteros de esas variables en un entorno alrededor de la solución obtenida considerando las variables 
+    reales. Uno de los métodos más utilizados es "Branch & bound" (bifurcacar y acotar), que consiste en procesar el problema
+     como si las variables fueran reales, y si una variable no tiene resultado entero,
+    se toma el entero más próximo superior e inferior y se plantean dos nuevos subproblemas con 
+    esos valores como restricciones para las variables.
+  </p>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_8nyfpWEk1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 style="text-align: left;">Análisis de Sensibilidad</h2>
+  <p style="text-align:justify;">
+      Encontrar el óptimo de un problema de optimización es solo una parte del proceso de solución.
+       Muchas veces nos interesa saber como varía la solución si se modifica alguno de los parámetros del
+        problema o bien alguna restricción. Con este propósito se realizan análisis de sensibilidad, los cuales
+        resultan particularmente útiles en el contexto de la toma de decisiones con impacto económico.
+      Algunos ejemplos de las métricas que se pueden obtener en un análisis de sensibilidad son:
+  </p>
+      <p class="tab">• Costo reducido: es la cantidad por la que un coeficiente tendría que mejorar 
+        (incrementar en el caso de maximización, decrementar en el caso de minimización) para que
+      sea posible que su variable correspondiente asuma un valor positivo en la solución (sea "incluida"
+      en la solución).</p>
+      <p class="tab">• Valor dual: se pueden calcular por cada restricción presente en el problema. 
+        Indica el valor asumido por la función objetivo (el nuevo óptimo) si se modifica en una unidad el extremo
+        derecho de la inecuación que describe una restricción. Resulta útil, por ejemplo, para
+         identificar cambios en los ingresos al modificar los límites de los recursos disponibles. En el ámbito
+          económico se lo suele asociar a la denominación "Shadow Price" o precio sombra.</p>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/NilqkAwZs1c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
+
+
+
+<!--Tipos de programacion con restricciones-->
+<!--Prog NO lineal-->
+<h1 style="text-align: center;">Programación No Lineal</h1>
+  <p style="text-align:justify;">
+    Programación no lineal (PNL) es el proceso de resolución de un sistema de
+     igualdades y desigualdades sujetas a un conjunto de restricciones sobre un conjunto de 
+     variables reales desconocidas, con un función objetivo a maximizar (o minimizar), 
+     cuando alguna de las restricciones o la función objetivo no son lineales. Para solucionar este tipo
+     de problemas se pueden hacer uso de formulaciones especiales de problemas de programación lineal, o bien
+      técnicas de Ramificación y poda ("Branch & cut").
+     Los problemas de PNL según la función objetivo que se trabaje, en PNL de función continua y no continua, que incluyen
+     los problemas combinatorios, de planning y scheduling. 
+  </p>
+  <h1 style="text-align: center;">Planning y Scheduling</h1>
+  <p style="text-align:justify;">
+    Planning o planificación es un caso especial de optimización con restricciones discreta. En un problema de planning, 
+    se definen una serie de trabajos o jobs, que consisten en distintas tareas o tasks. Para modelar el problema, 
+    se pueden representar dichas tareas con variables de intervalos de tiempo, dados por un tiempo inicial, uno final y una
+     duración. El orden en el que se pueden realizar las tareas tiene ciertas restricciones de precedencia. 
+     El objetivo, generalmente, es presentar un ordentamiento de las tareas que permita terminar todos los trabajos 
+     en el menor tiempo posible.
+      La técnica clásica para resolver problemas de planning es el método del camino crítico.<br><br>
+     Cuando a un problema de planning se le añaden consideraciones con respecto a los recursos necesarios
+      para la realización de las tareas, se habla de problemas de scheduling. En estos casos, el orden de las tareas
+      está también limitado por la disponibilidad de recursos, en especial si estos son compartidos por varias tareas. 
+      Según los recursos involucrados en el problema, se puede hablar de scheduling con recursos discretos (incluyendo recursos unarios)
+      o recursos continuos. También se pueden clasificar los recursos según su reusabilidad, distinguiendo recursos con reposición y sin reposición.
+  </p>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/MqgMrASzKU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
