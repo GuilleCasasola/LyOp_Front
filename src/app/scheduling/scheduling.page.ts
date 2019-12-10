@@ -21,9 +21,10 @@ export class SchedulingPage implements OnInit {
   errorServ=false;
   errorRest=false;
   message;
-
+  iterable12;
 
   constructor(private apiService : ApiService , public loadingController: LoadingController) { 
+    this.iterable12 = Array(12).fill(1);
       this.form= {
         cantJobs: 0,
         cantTasks: 0,
@@ -42,6 +43,13 @@ export class SchedulingPage implements OnInit {
 
   onSubmit(){
     this.presentLoading()
+
+    for( var j=0; j<this.cantRest;j++){
+
+      for( var i=0; i<this.form.cantTasks;i++){
+        this.form.precedencias[j][i] = parseInt(this.form.precedencias[j][i] )
+      }
+    }
     console.log(this.form);
     this.apiService.scheduling(this.form).subscribe(
     (data)=> {
@@ -68,6 +76,7 @@ export class SchedulingPage implements OnInit {
   }
   //New
   changeRest(){
+    
     this.form.precedencias = Array(parseInt(this.cantRest)).fill(null);
     for( var i=0; i<this.cantRest;i++){
       this.form.precedencias[i] = Array(2).fill(0);
@@ -102,6 +111,8 @@ export class SchedulingPage implements OnInit {
   //New
 
   calculate(){
+   
+      
   } 
 
   getContent() {

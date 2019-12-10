@@ -28,6 +28,11 @@
               <ion-select-option value="3">3</ion-select-option>
               <ion-select-option value="4">4</ion-select-option>
               <ion-select-option value="5">5</ion-select-option>
+              <ion-select-option value="6">6</ion-select-option>
+              <ion-select-option value="7">7</ion-select-option>
+              <ion-select-option value="8">8</ion-select-option>
+              <ion-select-option value="9">9</ion-select-option>
+              <ion-select-option value="10">10</ion-select-option>
             </ion-select>
         </ion-item>
 
@@ -39,17 +44,18 @@
             <ion-select-option value="3">3</ion-select-option>
             <ion-select-option value="4">4</ion-select-option>
             <ion-select-option value="5">5</ion-select-option>
+            <ion-select-option value="6">6</ion-select-option>
+            <ion-select-option value="7">7</ion-select-option>
+            <ion-select-option value="8">8</ion-select-option>
+            <ion-select-option value="9">9</ion-select-option>
+            <ion-select-option value="10">10</ion-select-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
           <ion-label>Cantidad de Restricciones</ion-label>
           <ion-select  name="cantRest" [(ngModel)]="cantRest" value="5" okText="Okay" (ionChange)="changeRest()" cancelText="Dismiss" >
-            <ion-select-option value="1">1</ion-select-option>
-            <ion-select-option value="2" selected>2</ion-select-option>
-            <ion-select-option value="3">3</ion-select-option>
-            <ion-select-option value="4">4</ion-select-option>
-            <ion-select-option value="5">5</ion-select-option>
+            <ion-select-option *ngFor="let i of iterable12; let ii = index " value="{{ii}}">{{ii}}</ion-select-option>
           </ion-select>
         </ion-item>
 
@@ -103,14 +109,21 @@
 
 
                 <ng-container *ngFor= "let j of form.precedencias; let jj = index" >
-                  <p class="col-2 ilb"> Termina Tarea: </p> 
-                  <ion-input  [(ngModel)]="form.precedencias[jj][0]"  [ngModelOptions]="{standalone: true}" type="number" class="ilb" placeholder="##" style="width: 50px;"  ></ion-input>
-                  <p class="col-2 ilb"> Antes de Tarea: </p>
-                  <ion-input  [(ngModel)]="form.precedencias[jj][1]"  [ngModelOptions]="{standalone: true}" type="number" class="ilb" placeholder="##" style="width: 50px;" ></ion-input>
+                  <p class="col-2 ilb"> Termina Tarea: </p>
+                  <select  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.precedencias[jj][0]"  okText="Ok" class="select"  style="width: 15%;" cancelText="Cancelar" >
+                      <option  *ngFor="let i of tareas; let ii = index " value="{{ii+1}}">{{ii+1}}</option>
+                  </select>
+                  
+                  <p class="col-2 ilb"> antes de Tarea: </p>
+                  <select  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.precedencias[jj][1]"  okText="Ok" class="select" style="width:  15%;" cancelText="Cancelar" >
+                      <option  *ngFor="let i of tareas; let ii = index " >{{ii+1}}</option>
+                  </select>
                   <br>
                 </ng-container>
             </div>
-          
+            <script>
+
+            </script>
             <div >
                 <ion-button expand="block" type="submit" (click)=calculate() >Calcular</ion-button>      
             </div>
