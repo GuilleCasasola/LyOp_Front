@@ -122,11 +122,33 @@
                 <ion-button expand="block" type="submit" (click)=calculate() >Calcular</ion-button>      
             </div>
         </div>
-        
-       
   </form>
-
-  
+  <!--SOLUCION-->
+  <div *ngIf="solucion" style="border: 2px solid green " class="block-container">
+      <ion-list>
+          <ion-list-header>
+              <h2 style="text-align: center;"> SOLUCIÓN</h2>
+          </ion-list-header>
+          <table>
+            <tr> 
+               <td></td>
+               <td>Job</td>
+               <td>Task</td>
+               <td>Start</td>
+               <td>End</td>
+               <!-- <td>Dual Value</td> -->
+            </tr>
+            <tr *ngFor="let sol of solucion['solution']; let i = index">
+               <td class="border"> {{i+1}}</td>
+               <td class="border">{{solucion['solution'][i]['job']}} </td>
+               <td class="border">{{solucion['solution'][i]['task']}}</td>
+               <td class="border">{{solucion['solution'][i]['start']}}</td>
+               <td class="border">{{solucion['solution'][i]['end']}}</td>
+            </tr>
+          </table> 
+          <ul> Tiempo Final: {{solucion['endTime']}}</ul>
+      </ion-list>
+  </div>
   <div *ngIf="errorRest" style="border: 2px solid yellow ;">
     <h2 style="text-align: center;"> No existe Solución</h2>
     <p> Revisa los datos ingresados.</p>

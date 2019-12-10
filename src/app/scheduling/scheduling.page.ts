@@ -53,6 +53,7 @@ export class SchedulingPage implements OnInit {
         console.log(data)
         this.errorRest=false;
         this.solucion=data;
+        console.log(this.solucion);
       }
       this.loadingController.dismiss();
     }, (error)=> {
