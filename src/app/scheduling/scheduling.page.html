@@ -57,38 +57,38 @@
 
           <!--tiempo de las Tasks -->
             <br>
-            <ion-label *ngIf="form.tiempoTasks" class="mmi"> Tiempo de cada Tarea </ion-label>
+            <ion-label *ngIf="form.tiempoTasks" class="mmi"> Tiempo que demora cada Tarea: </ion-label>
             <br>
             <div class="block-container" >
-              <ng-container  *ngFor="let i of form.tiempoTasks; let ii = index "   >
+              <ng-container  *ngFor="let i of tareas; let ii = index "   >
                   Tarea {{ii+1}}: <ion-input  [(ngModel)]="form.tiempoTasks[ii]" [ngModelOptions]="{standalone: true}" type="number" class="tiempo" placeholder="##" value="0"></ion-input> <br>
               </ng-container>
             </div>
             <br>
 
             <!--capacidades de cada recurso -->
-            <ion-label *ngIf="form.cantRecursos >= 1" class="mmi">Capacidad de cada recurso</ion-label>
+            <ion-label *ngIf="form.cantRecursos >= 1" class="mmi">Cantidad de cada recurso</ion-label>
             <br>
             <div class="block-container" >
-              <ng-container  *ngFor="let i of form.cantUnidades; let ii = index "   >
-                  Recurso {{ii+1}}: <ion-input  [(ngModel)]="form.cantUnidades[ii]" [ngModelOptions]="{standalone: true}" type="number" class="capac" placeholder="##"></ion-input> <br>
+              <ng-container  *ngFor="let i of unidades; let ii = index "   >
+                  Recurso {{ii+1}}: <ion-input  [(ngModel)]="form.cantUnidades[ii]" [ngModelOptions]="{standalone: true}" type="number" class="tiempo" placeholder="##"></ion-input> <br>
               </ng-container>
             </div>
             <br>
 
             <!--demanda de cada task -->
-            <ion-label *ngIf="form.cantRecursos >= 1" style="text-align: center;" class="mmi">Demanda de cada tarea</ion-label>
+            <ion-label *ngIf="form.cantRecursos >= 1" style="text-align: center;" class="mmi">Demanda de cada tarea: (Recursos por tarea)</ion-label>
             <div  class="block-container">
               <table >
                 <tr>
                   <td col-1></td>
-                  <td *ngFor= "let j of form.cantUnidades; let ii = index" class="border" style="background-color: rgb(191, 241, 241);"> <p> Rec. {{ii+1}} </p></td>
+                  <td *ngFor= "let j of unidades; let ii = index" class="border" style="background-color: rgb(191, 241, 241);"> <p> Rec. {{ii+1}} </p></td>
                 </tr>
 
-                <tr *ngFor= "let j of form.tiempoTasks; let jj = index" >
+                <tr *ngFor= "let j of tareas; let jj = index" >
                       <td col-1 class="border" style="background-color: rgb(191, 241, 241);"> <p> Tarea {{jj+1}} </p></td>
                       
-                      <td col-1 *ngFor="let i of form.cantUnidades; let ii = index " class="border">
+                      <td col-1 *ngFor="let i of unidades; let ii = index " class="border">
                           <ion-input  [(ngModel)]="form.demandaTasks[jj][ii]" name="dem{{jj}}{{ii}}" type="number" class="demanda" placeholder="##" value="0"  >
                             </ion-input>
                       </td>  
@@ -98,24 +98,17 @@
             </div>
 
             <!--restricciones de precedencias -->
-            <ion-label *ngIf="cantRest >= 1" style="text-align: center;" class="mmi">Restricciones de precedencia (endBeforeStart(Tarea1, Tarea2))</ion-label>
+            <ion-label *ngIf="cantRest >= 1" style="text-align: center;" class="mmi">Restricciones de precedencia </ion-label>
             <div  class="block-container">
-              <table >
-                <tr>
-                  <td col-1></td>
-                  <td *ngFor= "let j of dosTasks; let ii = index" class="border" style="background-color: rgb(191, 241, 241);"> <p> Tarea {{ii+1}} </p></td>
-                </tr>
 
-                <tr *ngFor= "let j of form.precedencias; let jj = index" >
-                      <td col-1 class="border" style="background-color: rgb(191, 241, 241);"> <p> Rest. {{jj+1}} </p></td>
-                      
-                      <td col-1 *ngFor="let i of dosTasks; let ii = index " class="border">
-                          <ion-input  [(ngModel)]="form.precedencias[jj][ii]" name="dem{{jj}}{{ii}}" type="number" class="demanda" placeholder="##" >
-                            </ion-input>
-                      </td>  
-                </tr>
-                
-              </table>
+
+                <ng-container *ngFor= "let j of form.precedencias; let jj = index" >
+                  <p class="col-2 ilb"> Termina Tarea: </p> 
+                  <ion-input  [(ngModel)]="form.precedencias[jj][0]"  [ngModelOptions]="{standalone: true}" type="number" class="ilb" placeholder="##" style="width: 50px;"  ></ion-input>
+                  <p class="col-2 ilb"> Antes de Tarea: </p>
+                  <ion-input  [(ngModel)]="form.precedencias[jj][1]"  [ngModelOptions]="{standalone: true}" type="number" class="ilb" placeholder="##" style="width: 50px;" ></ion-input>
+                  <br>
+                </ng-container>
             </div>
           
             <div >

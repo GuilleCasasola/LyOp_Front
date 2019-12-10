@@ -12,6 +12,8 @@ export class SchedulingPage implements OnInit {
   cantJobs;
   cantRest;
   dosTasks = [1, 2];
+  tareas;
+  unidades;
 
   //Old
   solucion;
@@ -72,16 +74,20 @@ export class SchedulingPage implements OnInit {
     }
     console.log(this.form.precedencias)
   }
+
   changeTasks(){
+    this.tareas = Array(parseInt(this.form.cantTasks)).fill(1);
     console.log("changeTasks")
     this.changeDemanda();
-    this.form.tiempoTasks = Array(parseInt(this.form.cantTasks)).fill(1);
+    
   }
+
   changeRec(){
-    this.form.cantUnidades = Array(parseInt(this.form.cantRecursos)).fill(1);
+    this.unidades = Array(parseInt(this.form.cantRecursos)).fill(1);
     console.log("changeRec")
     this.changeDemanda();
   }
+
   changeJobs(){
     this.cantJobs = this.form.cantJobs;//no haria falta
   }

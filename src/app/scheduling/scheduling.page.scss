@@ -1,5 +1,5 @@
-.coeficiente {
-    width: 100%;
+.tiempo {
+    width: 50%;
     display: inline-block; 
     text-align: center;
     border: 1px;
@@ -31,6 +31,7 @@
     border: 1px grey solid;
     text-align:  center;
 }
+
 .block-container{
     border: 1px solid slateblue;
     padding: 2%;
@@ -59,4 +60,8 @@ body {
 
 .row:last-child .col {
     border-bottom: solid 1px grey;
+}
+
+.ilb {
+    display: inline-block; 
 }
