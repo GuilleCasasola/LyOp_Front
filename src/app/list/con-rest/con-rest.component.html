@@ -2,7 +2,7 @@
 <h1 style="text-align: center;">Optimización con restricciones</h1>
 <p style="text-align:justify;">
     Los problemas de optimización con restricciones se basan en la optimización de una función, donde el espacio de soluciones está restringido.
-    Un problema de optimización sin restricciones puede ser representado de la siguiente forma:
+    Un problema de optimización con restricciones puede ser representado de la siguiente forma:
   </p>
   <p class="tab">Sea ƒ: ℜ<sup>n</sup> → ℜ una función a optimizar (función objetivo)</p>
   <p class="tab">Se formula el problema como opt ƒ(x<sub>0</sub>,... , x<sub>n</sub>), sujeto a </p>
@@ -19,7 +19,7 @@
   <p style="text-align:justify;">
     La programación lineal es el campo de la programación matemática dedicado a maximizar o minimizar (optimizar) 
     una función lineal, denominada función objetivo, de tal forma que las variables de dicha función estén sujetas a una serie de restricciones expresadas mediante un sistema de ecuaciones o inecuaciones también lineales. 
-    Algunos de los métodos más comunes para resolver problemas de programación lineal es el Método Simplex*<sup>(1)</sup> y el Método Gráfico. 
+    Algunos de los métodos más comunes para resolver problemas de programación lineal son el Método Simplex*<sup>(1)</sup> y el Método Gráfico. 
   </p>
 
   <h1> Variables </h1>
@@ -50,8 +50,9 @@
 </p>
 <p style="text-align:justify;">
     <i>*<sup>(1)</sup>: el método Simplex consiste en aplicar las restricciones, delimitando así un espacio de soluciones 
-      (llamado también poliedro de soluciones) como la intersección de varios semiespacios. Luego se recorren las aristas de dicho espacio
-      de soluciones, comenzando siempre por las de mayor pendiente, en búsqueda de un óptimo en la función objetivo.
+      (llamado también poliedro de soluciones). Dicho espacio de soluciones quedará entonces determinado como la intersección de los semiespacios correspondientes 
+     a las restricciones. Luego se procede a recorrer las aristas del poliedro
+      de soluciones, comenzando siempre por las aquellas de mayor pendiente, en búsqueda de un óptimo en la función objetivo.
     </i> 
 </p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7EqYVjYHGnA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -109,7 +110,8 @@
     se pueden representar dichas tareas con variables de intervalos de tiempo, dados por un tiempo inicial, uno final y una
      duración. El orden en el que se pueden realizar las tareas tiene ciertas restricciones de precedencia. 
      El objetivo, generalmente, es presentar un ordentamiento de las tareas que permita terminar todos los trabajos 
-     en el menor tiempo posible. La técnica clásica para resolver problemas de planning es el método del camino crítico.<br>
+     en el menor tiempo posible.
+      La técnica clásica para resolver problemas de planning es el método del camino crítico.<br><br>
      Cuando a un problema de planning se le añaden consideraciones con respecto a los recursos necesarios
       para la realización de las tareas, se habla de problemas de scheduling. En estos casos, el orden de las tareas
       está también limitado por la disponibilidad de recursos, en especial si estos son compartidos por varias tareas. 

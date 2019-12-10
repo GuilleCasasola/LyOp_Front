@@ -33,7 +33,7 @@ export class ApiService {
 
   public sensibilidad(data){
     var httpOptions;
-    return this.http.post(API_URL+"sensibility",data,httpOptions);
+    return this.http.post('http://localhost:8000/'+"sensibility",data,httpOptions);
     
   }
 
