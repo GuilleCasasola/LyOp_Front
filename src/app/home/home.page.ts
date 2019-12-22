@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
   constructor() {}
 
 }

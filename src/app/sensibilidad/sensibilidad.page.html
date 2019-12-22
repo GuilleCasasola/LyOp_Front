@@ -81,33 +81,42 @@
         
        
   </form>
-
   <div *ngIf="solucion" style="border: 2px solid green " class="block-container">
     
     <ion-list>
         <ion-list-header>
             <h2 style="text-align: center;"> SOLUCIÓN</h2>
         </ion-list-header>
-      <ion-item *ngFor="let i of solucion['solution']; let ii = index "> Producto{{ii+1}}={{i}}</ion-item>
-    
+        <table>
+          <tr> 
+             <td></td>
+             <td>Producción</td>
+             <td>Costo Reducido</td>
+             <!-- <td>Dual Value</td> -->
+          </tr>
+          <tr *ngFor="let sol of solucion['solution']; let i = index">
+             <td class="border"> Producto {{i+1}}</td>
+             <td class="border">{{solucion['solution'][i]}} </td>
+             <td class="border">{{solucion['costo_reducido'][i]}}</td>
+            <!-- <td class="border">{{solucion['dual_value'][i]}}</td> -->
+          </tr>
+        </table> 
+        <ul> Beneficio total: {{solucion["opt"]}}</ul>
+        <table>
+          <tr> 
+              <td></td>
+              <td>Consumo</td>
+              <td>Shadow Price</td>
+              <!-- <td>Dual Value</td> -->
+          </tr>
+          <tr *ngFor="let sol of solucion['consumo']; let i = index">
+              <td class="border"> Insumo {{i+1}}</td>
+              <td class="border">{{solucion['consumo'][i]}} </td>
+              <td class="border">{{solucion['dual_value'][i]}}</td>
+            <!-- <td class="border">{{solucion['dual_value'][i]}}</td> -->
+          </tr>
+        </table>   
     </ion-list>
-   
-   <ul> Resultado objetivo: {{solucion["opt"]}}</ul>
-   <table>
-     <tr> 
-        <td></td>
-        <td>Consumo</td>
-        <td>Costo Reducido</td>
-        <!-- <td>Dual Value</td> -->
-     </tr>
-     <tr *ngFor="let sol of solucion['solution']; let i = index">
-        <td class="border"> Producto {{i+1}}</td>
-        <td class="border">{{solucion['consumo'][i]}} </td>
-        <td class="border">{{solucion['costo_reducido'][i]}}</td>
-       <!-- <td class="border">{{solucion['dual_value'][i]}}</td> -->
-     </tr>
-   </table>       
-    
   </div>
   
   <div *ngIf="errorRest" style="border: 2px solid yellow ;">
@@ -120,5 +129,4 @@
 
       <p> No has completado todos los valores, o es posible que exista un problema en el servidor</p>
   </div>
-  
 </ion-content>

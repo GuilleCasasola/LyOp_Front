@@ -4,41 +4,90 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      Inicio
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/banner.jpg" alt=""/>
-      <ion-card-header>
-        <ion-card-subtitle>Lógica y Optimización</ion-card-subtitle>
-        <ion-card-title>¡Bienvenidos!</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Hola! Bienvenidos a la app de Integración de contenidos de Lógica y Optimización, donde tendras todo lo necesario para aprender los contenidos mínimos de la materia y al mismo tiempo jugar con distintos valores en las diferentes areas de la optimización.</p>
-      </ion-card-content>
-    </ion-card>
+    
+      <ion-slides  [options]="slideOpts" style="margin: 2%;">
+        <ion-slide>
+          <ion-card class="welcome-card">
+            <div align="center" style="border: solid 1px cadetblue;">
+              <img src="assets/icons/logo-299x299.png" alt="" style="height: 100%; width: auto;" />
+            </div>
+            <div align="left">
+            <ion-card-header>
+              <ion-card-subtitle>Lógica y Optimización</ion-card-subtitle>
+              <ion-card-title>¡Bienvenidos!</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Hola! Bienvenidos a la app de Integración de contenidos de Lógica y Optimización (Dada tambien como Investigación Operativa), donde tendras todo lo necesario para aprender los contenidos mínimos de la materia y al mismo tiempo jugar con distintos valores en las diferentes areas de la optimización.</p>
+            </ion-card-content>
+             </div>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card class="welcome-card-2">
+          <div align="center" >
+            <img src="/assets/fiestas.jpg" alt="" width="auto" height="100%" />
+          </div>
+         
+          <div align="left">
+            <ion-card-header>
+              <ion-card-subtitle>Navidad y Año Nuevo</ion-card-subtitle>
+              <ion-card-title>¡Felices Fiestas!</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p> Esperamos que pases unas muy felices y divertidas fiestas y que el 2020 empiece con la mejor energía posible :D  </p>
+              <br>
+              <p> Saludos besos y abrazos!</p>
+            </ion-card-content>
+          </div>
+          </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+          <ion-card class="welcome-card-2">
+            <div align="center" style="border: solid 1px cadetblue;">
+              <img src="/assets/Gantt.png" alt="" width="auto" height="100%" />
+            </div>
+         
+          <div align="left">
+            <ion-card-header>
+              <ion-card-subtitle>22/12/2019</ion-card-subtitle>
+              <ion-card-title>¿Qué hay de nuevo?</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p> Actualizamos los pendientes, e incorporamos la libreria CanvasJS para visualizar graficamente las soluciones a problemas de Scheduling </p>
+              <br>
+              <p> Probalo! </p>
+            </ion-card-content>
+          </div>
+          </ion-card>
+        </ion-slide>
+
+      </ion-slides>
+
+
+
     <ion-list lines="none">
       <ion-list-header>
         <ion-label>Recursos</ion-label>
       </ion-list-header>
+      <ion-item href="https://github.com/GuilleCasasola/LyOp_Front">
+        <ion-icon slot="start"  name="logo-github"></ion-icon>
+        <ion-label>Codigo fuente de la APP</ion-label>
+      </ion-item>
+      <ion-item href="https://github.com/simonpedrogonzalez/LyOpServer">
+        <ion-icon slot="start"  name="logo-github"></ion-icon>
+        <ion-label>Código fuente de la API</ion-label>
+      </ion-item>
       <ion-item href="http://www.economiayciencia.com/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Economia y Ciencia</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
+        <ion-icon slot="start" color="medium" name="open"></ion-icon>
+        <ion-label>Página: Economia y Ciencia</ion-label>
       </ion-item>
     </ion-list>
+    <p style="color:darkgrey; font-size:small"> 2019 - Casasola Guillermo. González Simón Pedro. </p>
 </ion-content>
