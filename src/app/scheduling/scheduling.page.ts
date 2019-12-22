@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from "../api.service"
 import { LoadingController } from '@ionic/angular';
 
+import * as CanvasJS from './canvasjs.min';
+
 @Component({
   selector: 'app-scheduling',
   templateUrl: './scheduling.page.html',
@@ -9,9 +11,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class SchedulingPage implements OnInit {
 
-  cantJobs;
   cantRest;
-  dosTasks = [1, 2];
   tareas;
   unidades;
 
@@ -21,7 +21,9 @@ export class SchedulingPage implements OnInit {
   errorServ=false;
   errorRest=false;
   message;
-  iterable12;
+  iterable12; //Arreglito de 12 para ayudarnos a mostrar los select de la vista con ngFor
+
+  chart;
 
   constructor(private apiService : ApiService , public loadingController: LoadingController) { 
     this.iterable12 = Array(12).fill(1);
@@ -38,11 +40,10 @@ export class SchedulingPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSubmit(){
-    this.presentLoading()
+    this.presentLoading();  //Cartelido de cargando
 
     for( var j=0; j<this.cantRest;j++){
 
@@ -50,33 +51,75 @@ export class SchedulingPage implements OnInit {
         this.form.precedencias[j][i] = parseInt(this.form.precedencias[j][i] )
       }
     }
-    console.log(this.form);
     this.apiService.scheduling(this.form).subscribe(
-    (data)=> {
-      this.errorServ=false;
-      if(data["error"]){
-        this.solucion= null;
-        this.message = data["message"];
-        this.errorRest=true;
-      }else{
-        console.log(data)
-        this.errorRest=false;
-        this.solucion=data;
-        console.log(this.solucion);
-      }
-      this.loadingController.dismiss();
-    }, (error)=> {
-        this.errorServ=true;
-        this.solucion = null;
+      (data)=> {
+        this.errorServ=false;
+        if(data["error"]){
+          this.solucion= null;
+          this.message = data["message"];
+          this.errorRest=true;
+        }else{
+          this.errorRest=false;
+          this.solucion=data;
+
+          //Gantt
+          var solu = this.solucion.solution;
+          var grafSolu =[];
+          //Vamos a darle formato a la solucion para que la muestre el grafico  { x: 10, y:[0, 20], label: "Job 1 Tarea 1" },
+          for(var i=0; i< solu.length;i++){
+            grafSolu.push({x: i+5 , y: [solu[i].start ,solu[i].end], label: "Job " + solu[i].job + " Tarea " + solu[i].task});
+          }
+          this.newChart(grafSolu);
+        }
         this.loadingController.dismiss();
-  }
-   
+      }, (error)=> {
+          this.errorServ=true;
+          this.solucion = null;
+          this.loadingController.dismiss();
+      }
     );
     
   }
-  //New
-  changeRest(){
+
+  //Metodo que crea y renderiza el Diagrama de Gantt
+  newChart(dataP){
+    var inter = 10;
+    var end = this.solucion.endTime;
+    if(end >= 200 && end<= 400){
+      inter = 25;
+    }else if(end>=500){
+      inter =50;
+    }
     
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      exportEnabled: true,
+      title: {
+        text: "Diagrama de Gantt"
+      },
+      axisX: {
+        title: "Tareas"
+      },
+      axisY: {
+        includeZero: true,
+        title: "Tiempo",
+        interval: inter
+      }, 
+      data: [{
+        type: "rangeBar",
+        yValueFormatString: "#0",
+        indexLabel: "{y[#index]}",
+        toolTipContent: "<b>{label}</b>: de {y[0]} a {y[1]}",
+        dataPoints: dataP
+      }]
+    });
+    chart.render();
+  }
+
+  changeRest(){
+    // precedencias son las reglas de precedencias justamente del tipo "Terminar tarea X antes de tarea Y"
+    // Creamos un arreglo con la cantidad de restricciones que se seleccionan en la vista
+     // Y cada elemento del arreglo le corresponden dos elementos correspodientes a la Tarea X e Y
     this.form.precedencias = Array(parseInt(this.cantRest)).fill(null);
     for( var i=0; i<this.cantRest;i++){
       this.form.precedencias[i] = Array(2).fill(0);
@@ -85,43 +128,34 @@ export class SchedulingPage implements OnInit {
   }
 
   changeTasks(){
+    // this.tareas lo usamos para iterar en la vista para mostrar los inputs de tareas
     this.tareas = Array(parseInt(this.form.cantTasks)).fill(1);
-    console.log("changeTasks")
     this.changeDemanda();
-    
   }
 
   changeRec(){
+    // this.unidades lo usamos para iterar en la vista para mostrar los inputs de recursos
     this.unidades = Array(parseInt(this.form.cantRecursos)).fill(1);
-    console.log("changeRec")
     this.changeDemanda();
   }
 
-  changeJobs(){
-    this.cantJobs = this.form.cantJobs;//no haria falta
-  }
   changeDemanda(){
     // Cambiar el tamano del arreglo bidimensional de demanda de cada task
+    // Indica cuantos la cantidad de recursos necesarios para cada tarea
+    // Por eso se crea un arreglo de tareas y cada uno de los elementos es un arreglo con la cantidad de recursos
     this.form.demandaTasks = Array(parseInt(this.form.cantTasks)).fill(null);
     for( var i=0; i<this.form.cantTasks;i++){
       this.form.demandaTasks[i] = Array(parseInt(this.form.cantRecursos)).fill(0);
     }
-    console.log("changeDemanda")
+
   }
-  //New
 
   calculate(){
-   
-      
+   //Esto es para que se active el div del grafico antes de hacer el Submit. Porque si no la libreria no encuentra donde poner el gráfico
+   this.solucion=true;
   } 
 
-  getContent() {
-    return document.querySelector('ion-content');
-  }
-   scrollToBottom() {
-    this.getContent().scrollToBottom(500);
-  }
-  
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       spinner: null,
@@ -131,6 +165,7 @@ export class SchedulingPage implements OnInit {
     });
     return await loading.present();
   }
+
 
 
 }

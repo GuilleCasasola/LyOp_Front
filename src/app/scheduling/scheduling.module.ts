@@ -8,6 +8,8 @@ import { SchedulingPageRoutingModule } from './scheduling-routing.module';
 
 import { SchedulingPage } from './scheduling.page';
 
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,4 +19,7 @@ import { SchedulingPage } from './scheduling.page';
   ],
   declarations: [SchedulingPage]
 })
-export class SchedulingPageModule {}
+export class SchedulingPageModule {
+
+  
+}

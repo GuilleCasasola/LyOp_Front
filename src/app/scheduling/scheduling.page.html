@@ -11,7 +11,7 @@
   <form  (ngSubmit)="onSubmit()">
         <ion-item>
             <ion-label>Cantidad de Trabajos</ion-label>
-            <ion-select  name="cantJobs" [(ngModel)]="form.cantJobs" okText="Okay" (ionChange)="changeJobs()" cancelText="Dismiss" >
+            <ion-select  name="cantJobs" [(ngModel)]="form.cantJobs" okText="Ok" cancelText="Cancelar" >
               <ion-select-option value="1">1</ion-select-option>
               <ion-select-option value="2" selected>2</ion-select-option>
               <ion-select-option value="3">3</ion-select-option>
@@ -22,7 +22,7 @@
 
         <ion-item>
             <ion-label>Cantidad de Tareas</ion-label>
-            <ion-select  [(ngModel)]="form.cantTasks" name="cantTasks" (ionChange)="changeTasks()" okText="Okay" cancelText="Dismiss" >
+            <ion-select  [(ngModel)]="form.cantTasks" name="cantTasks" (ionChange)="changeTasks()" okText="Ok" cancelText="Cancelar" >
               <ion-select-option value="1">1</ion-select-option>
               <ion-select-option value="2" selected>2</ion-select-option>
               <ion-select-option value="3">3</ion-select-option>
@@ -38,7 +38,7 @@
 
         <ion-item>
           <ion-label>Cantidad de Recursos</ion-label>
-          <ion-select  name="cantRecursos" [(ngModel)]="form.cantRecursos" value="5" okText="Okay" (ionChange)="changeRec()" cancelText="Dismiss" >
+          <ion-select  name="cantRecursos" [(ngModel)]="form.cantRecursos" value="5" okText="Ok" (ionChange)="changeRec()" cancelText="Cancelar" >
             <ion-select-option value="1">1</ion-select-option>
             <ion-select-option value="2" selected>2</ion-select-option>
             <ion-select-option value="3">3</ion-select-option>
@@ -131,29 +131,12 @@
   </form>
   <!--SOLUCION-->
   <div *ngIf="solucion" style="border: 2px solid green " class="block-container">
-      <ion-list>
-          <ion-list-header>
-              <h2 style="text-align: center;"> SOLUCIÓN</h2>
-          </ion-list-header>
-          <table>
-            <tr> 
-               <td></td>
-               <td>Job</td>
-               <td>Task</td>
-               <td>Start</td>
-               <td>End</td>
-               <!-- <td>Dual Value</td> -->
-            </tr>
-            <tr *ngFor="let sol of solucion['solution']; let i = index">
-               <td class="border"> {{i+1}}</td>
-               <td class="border">{{solucion['solution'][i]['job']}} </td>
-               <td class="border">{{solucion['solution'][i]['task']}}</td>
-               <td class="border">{{solucion['solution'][i]['start']}}</td>
-               <td class="border">{{solucion['solution'][i]['end']}}</td>
-            </tr>
-          </table> 
-          <ul> Tiempo Final: {{solucion['endTime']}}</ul>
-      </ion-list>
+
+          <h2 style="text-align: center;"> SOLUCIÓN </h2>
+          <h3> Tiempo Final: {{solucion['endTime']}}</h3>
+          <!-- Diagrama de Gantt-->
+          <div id="chartContainer" style="height: 200px; width: 100%;"></div>
+
   </div>
   <div *ngIf="errorRest" style="border: 2px solid yellow ;">
     <h2 style="text-align: center;"> No existe Solución</h2>
@@ -163,7 +146,8 @@
   <div *ngIf="errorServ" style="border: 2px solid red ;">
       <h2 style="text-align: center;"> Error</h2>
 
-      <p> No has completado todos los valores, o es posible que exista un problema en el servidor</p>
+      <p> No has completado todos los valores como corresponde, o es posible que exista un problema en el servidor</p>
   </div>
+  
   
 </ion-content>
