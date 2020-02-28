@@ -9,5 +9,9 @@
 ### ¿En qué consiste LyOp?
 
 > LyOp está realizada con la ayuda del framework IONIC, y Angular. Actualmente la aplicación muestra una lista los contenidos basicos de la materia y videos explicativos realizados por el profesor. También posee una serie de calculadoras con las cuales podemos resolver problemas de optimización genericos. Estos son:
+  * Programación entera
+  * Programación lineal
+  * Sensibilidad
+  * Scheduling
 
 
